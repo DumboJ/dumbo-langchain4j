@@ -14,7 +14,7 @@
   - 多模型环境变量占位（`DEEPSEEK_*`、`QWEN_*`、`GROK_*`）
   - 运行前请在 IDEA 的 `Environment variables` 里填入对应 key，或使用 `application-local.yaml` 本地引入。
 
-### 学习路径
+### 学习内容更新记录
 
 #### Case1 多模型支持
 - 新建 [AiProperties](src/main/java/com/dumboj/case1/model/AiProperties.java)、[ProviderSettings](src/main/java/com/dumboj/case1/model/ProviderSettings.java)、[ModelProvider](src/main/java/com/dumboj/case1/model/ModelProvider.java)、[OpenAiCompatibleChatModelFactory](src/main/java/com/dumboj/case1/model/OpenAiCompatibleChatModelFactory.java) 支持多模型调用
@@ -29,6 +29,16 @@
 
 #### Case3 流式响应
 - [OpenAiStreamingChat](src/main/java/com/dumboj/case1/streamingchat/OpenAiStreamingChat.java) 演示 `StreamingChatModel` + `StreamingChatResponseHandler` 的逐字返回、完整响应与异常回调
+
+#### Case4 Spring Boot 集成与接口测试
+- [ModelClient](src/main/java/com/dumboj/case1/model/ModelClient.java) 封装 `AiProperties` + `OpenAiCompatibleChatModelFactory`，按模型缓存 `ChatModel` / `StreamingChatModel`
+- [TravelConversationService](src/main/java/com/dumboj/case1/integration/TravelConversationService.java) 按模型隔离会话管理器，按 `requestId` 隔离多轮对话
+- [TravelChatController](src/main/java/com/dumboj/case1/integration/TravelChatController.java) 对外 REST 接口 `POST /travel/chat`
+- [TravelChatRequest](src/main/java/com/dumboj/case1/integration/TravelChatRequest.java) 请求参数：`requestId` / `message` / `modelType`
+- HTTP 测试脚本（位于 `src/main/java/com/dumboj/case1/integration/http`）：
+  - [travel-controller.http](src/main/java/com/dumboj/case1/integration/http/travel-controller.http) —— 用 IDEA HTTP Client 测本地接口
+  - [llm-examples.http](src/main/java/com/dumboj/case1/integration/http/llm-examples.http) —— 直接测三方模型 API 连通性
+  - [http-client.env.json](src/main/java/com/dumboj/case1/integration/http/http-client.env.json) —— IDEA HTTP Client 环境变量管理
 
 ### 本地配置方式
 

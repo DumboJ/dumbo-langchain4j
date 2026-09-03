@@ -1,0 +1,78 @@
+### 1. 单轮对话：DeepSeek（modelType = DEEPSEEK）
+POST {{HOST}}/travel/chat
+Content-Type: application/json
+
+{
+  "requestId": "trip-001",
+  "message": "北京哪里好玩？",
+  "modelType": "DEEPSEEK"
+}
+
+### 2. 多轮上下文：同一 requestId 连续提问，验证 ChatMemory 生效
+POST {{HOST}}/travel/chat
+Content-Type: application/json
+
+{
+  "requestId": "trip-001",
+  "message": "三个人从云南来预算300够吗？",
+  "modelType": "DEEPSEEK"
+}
+
+### 3. 切换模型：Qwen
+POST {{HOST}}/travel/chat
+Content-Type: application/json
+
+{
+  "requestId": "trip-002",
+  "message": "你好，请用一句话介绍你自己",
+  "modelType": "QWEN"
+}
+### 3.1 切换模型：Qwen
+POST {{HOST}}/travel/chat
+Content-Type: application/json
+
+{
+  "requestId": "trip-002",
+  "message": "北京哪里好玩？",
+  "modelType": "QWEN"
+}
+
+### 3.2 追问：Qwen
+POST {{HOST}}/travel/chat
+Content-Type: application/json
+
+{
+  "requestId": "trip-002",
+  "message": "三个人从云南来预算300够吗？",
+  "modelType": "QWEN"
+}
+
+### 3.3 模型：Qwen 不同 requestId
+POST {{HOST}}/travel/chat
+Content-Type: application/json
+
+{
+  "requestId": "trip-003",
+  "message": "刚才都聊了什么",
+  "modelType": "QWEN"
+}
+
+### 4. 切换模型：Grok
+POST {{HOST}}/travel/chat
+Content-Type: application/json
+
+{
+  "requestId": "trip-003",
+  "message": "你好，请用一句话介绍你自己",
+  "modelType": "GROK"
+}
+
+### 5. 参数校验失败示例：requestId 为空
+POST {{HOST}}/travel/chat
+Content-Type: application/json
+
+{
+  "requestId": "",
+  "message": "北京哪里好玩？",
+  "modelType": "DEEPSEEK"
+}

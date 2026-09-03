@@ -1,0 +1,63 @@
+### 1. DeepSeek 基础单轮对话（对应 OpenAiChat）
+POST https://api.deepseek.com/v1/chat/completions
+Authorization: Bearer {{DEEPSEEK_API_KEY}}
+Content-Type: application/json
+
+{
+  "model": "deepseek-chat",
+  "messages": [
+    {"role": "user", "content": "北京哪里好玩？"}
+  ]
+}
+
+### 2. 带 System Message 的对话（对应 UserSysMsgChat）
+POST https://api.deepseek.com/v1/chat/completions
+Authorization: Bearer {{DEEPSEEK_API_KEY}}
+Content-Type: application/json
+
+{
+  "model": "deepseek-chat",
+  "messages": [
+    {"role": "system", "content": "你是一名旅游专家、旅游博主。回答简洁明练，不超过50字"},
+    {"role": "user", "content": "北京哪里好玩？"}
+  ]
+}
+
+### 3. 多轮上下文对话（对应 TravelConversation / SimpleChatMemory）
+POST https://api.deepseek.com/v1/chat/completions
+Authorization: Bearer {{DEEPSEEK_API_KEY}}
+Content-Type: application/json
+
+{
+  "model": "deepseek-chat",
+  "messages": [
+    {"role": "system", "content": "你是一名旅游专家、旅游博主。回答简洁明练，不超过50字"},
+    {"role": "user", "content": "北京哪里好玩？"},
+    {"role": "assistant", "content": "故宫、长城、颐和园必去；南锣鼓巷、什刹海体验胡同；国家博物馆长知识。"},
+    {"role": "user", "content": "三个人从云南来预算300够吗？"}
+  ]
+}
+
+### 4. 多模型切换：Qwen 基础对话
+POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+Authorization: Bearer {{QWEN_API_KEY}}
+Content-Type: application/json
+
+{
+  "model": "qwen-plus",
+  "messages": [
+    {"role": "user", "content": "你好，请用一句话介绍你自己"}
+  ]
+}
+
+### 5. 多模型切换：Grok 基础对话
+POST https://api.x.ai/v1/chat/completions
+Authorization: Bearer {{GROK_API_KEY}}
+Content-Type: application/json
+
+{
+  "model": "grok-3-mini",
+  "messages": [
+    {"role": "user", "content": "你好，请用一句话介绍你自己"}
+  ]
+}

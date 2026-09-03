@@ -1,3 +1,5 @@
+server:
+  port: 7001
 spring:
   application:
     name: hello-langchain
@@ -12,7 +14,7 @@ app:
         api-key: ${DEEPSEEK_API_KEY}
       qwen:
         base-url: ${QWEN_BASE_URL:https://dashscope.aliyuncs.com/compatible-mode/v1}
-        model-name: ${QWEN_MODEL_NAME:qwen-plus}
+        model-name: ${QWEN_MODEL_NAME:qwen3.8-flash}
         api-key: ${QWEN_API_KEY}
       grok:
         base-url: ${GROK_BASE_URL:https://api.x.ai/v1}
